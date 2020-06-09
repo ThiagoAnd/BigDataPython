@@ -2,8 +2,8 @@ import pandas as pd
 import xlrd
 import os
 pd.set_option('display.max_columns', 26)
-pd.set_option('display.width', 2000)
-pd.set_option('display.max_rows', 500)
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_rows', 5000)
 
 
 source = "Dados"
@@ -16,7 +16,7 @@ for i in range(len(dir_list)):
     filename = dir_list[i]
    # book = pd.ExcelFile(filename)
     dados = pd.read_excel(filename)
-    print(dados)
+    print(dados.date)
 
 
 
