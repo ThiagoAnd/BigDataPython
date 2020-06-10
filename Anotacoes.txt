@@ -28,3 +28,30 @@ Z)
 IDEIAS
 
 Duracao de videos longo gera + ou - likes e views
+
+
+
+
+**************************************
+data watch_time_minutes	
+average_view_duration de vista	
+average_percentage_viewed	
+Assinantes	
+video_thumbnail_impressions
+video_thumbnail_impressions_ctr
+estimated_unique_viewers
+estimated_partner_revenue estimated_partner_ad_revenue
+youtube_ad_revenue
+estimated_partner_adsense_revenue	
+ad_impressions
+cpm reprodução baseada cpm
+reproduções monetizadas estimadas	
+Gosta
+Desagrados
+Ações
+cliques de cartão	
+cartões mostrados
+cliques teaser cartão
+teasers cartão mostrado
+elemento de tela final clica
+elementos de tela final mostrados
