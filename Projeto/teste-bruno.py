@@ -8,7 +8,7 @@ pd.set_option('display.width', 1000)
 pd.set_option('display.max_rows', 5000)
 
 
-'''
+
 source = "Dados"
 
 dir_list = os.listdir(source)
@@ -17,14 +17,14 @@ os.chdir(source)
 
 
 
-
+dadosMaster = pd.DataFrame([])
 for i in range(len(dir_list)):
     filename = dir_list[i]
-   # book = pd.ExcelFile(filename)
     dados = pd.read_excel(filename)
+    dadosMaster = dadosMaster.append(dados)
 
-    #print(dados.describe())
-'''
+print(dadosMaster)
+
 
 
 
@@ -34,12 +34,21 @@ for i in range(len(dir_list)):
 #matplotlib.pyplot.plot(dados['views'], dados['likes'])
 #matplotlib.pyplot.show()
 
+'''
 meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho']
 valores = [105235, 107697, 110256, 109236, 108859, 109986]
 matplotlib.pyplot.plot(meses, valores)
 
 matplotlib.pyplot.show()
+'''
+#dados = pd.read_excel('Dados/0NMfcDpYXo_2018-05-31_2019-05-31.xlsx')
+#df = pd.DataFrame(dados.date,dados.likes)
 
+#print(dados.groupby('date'))
+#print(dados['views'].value_counts())
+
+#print(dados.groupby("views"))
+#["date"].sort_values()) #  agrupa e organizar os dados
 '''
 def xlread(arq_xls):
     """
@@ -79,7 +88,7 @@ print(dados)
 # print(dados['likes'].value_counts())  fazer contagem
 #print(dados['likes'].value_counts(normalize = True)) contgem por porcentagem
 
-# print(dados.groupby("date").mean() ["date"].sort_values())  agrupa e organizar os dados
+
 
 '''
     def truncar(bairro):
