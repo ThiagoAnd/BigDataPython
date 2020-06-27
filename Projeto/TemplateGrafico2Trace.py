@@ -8,4 +8,6 @@ df = pd.DataFrame({
     'y':[5,6,7,8],})
 fig2 = px.bar(df, x="x", y="y")
 fig.add_trace(fig2.data[0])
+fig.write_html('../Output/TemplateTrace.html', auto_open=True)
+
 fig.show()

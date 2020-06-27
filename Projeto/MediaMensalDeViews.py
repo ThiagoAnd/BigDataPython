@@ -1,6 +1,8 @@
+#Faz a media de todos os dias de cada mes e monta um grafico
 import pandas as pd
 import xlrd
 import os
+import plotly.express as px
 
 pd.set_option('display.max_columns', 30)
 pd.set_option('display.width', 20000)
@@ -17,27 +19,42 @@ for i in range(len(dir_list)):
     dados = pd.read_excel(filename)
     dadosMaster = dadosMaster.append(dados)
 
-#print(dados[dados['views'] == dados['views'].max()])
-# print(dados.rename(columns={'date': 'Data', 'watch_time_minutes': 'Minutos assistidos', 'views': 'visualizacoes'}))
-# print(dados['likes'].value_counts())
-# #print(filename)
+dadosMaster['mes'] = dadosMaster['date'].astype('str').str[:7]
 
-# print(dados['date'])
-# print(dados.describe())
-# print(dados.loc[dados['date'] == "2019-05-30"])
+output = dadosMaster[['mes', 'views']].groupby('mes').mean()
+output.reset_index(inplace=True)
+print("Construção da informaçaõ finalizada")
+print("Iniciando construção do grafico")
+df = output
+px.defaults.color_continuous_scale = px.colors.sequential.Blackbody
+fig = px.bar(df, x="mes", y="views", color="mes",
 
-#print(dadosMaster.sort_values(by=['date']))
-#print(dadosMaster.loc[dados['date'] == "2018-05-31"])
+             title="Media mensal de views 2018 - 2019")
 
-#dadosMaster['novo'] = dadosMaster['date'].str[:7]
-dadosMaster['novo'] = dadosMaster['date'].astype('str').str[:7]
+fig.update_layout(
+    title={
+        # 'text': "Media mensal de views 2018 - 2019",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
 
-#print(dadosMaster.novo)
-#print(dadosMaster[['novo', 'views']])
-print(dadosMaster[['novo', 'views']].groupby(['novo']).mean())
-#print(dadosMaster[['date', 'views', 'NOVO']].sort_values(by=['date']))
+    xaxis_title="Meses",
+    yaxis_title="Quantidade de views",
+    legend_title_text='Meses',
+    xaxis=dict(
 
+       type='category'
+    ),
 
-#print(dadosMaster.groupby(['date']).mean())
-#print(dadosMaster[['date', 'views', 'novo']].groupby(['date']).mean())
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="#297554"
 
+    )
+)
+
+fig.write_html('../first_figure.html', auto_open=True)
+print("Gravação do grafico finalizada")
+fig.show()

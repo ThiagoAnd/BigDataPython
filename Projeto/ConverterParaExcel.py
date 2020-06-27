@@ -27,7 +27,7 @@ for i in range(len(dir_list)):
 # print(dados.describe())
 # print(dados.loc[dados['date'] == "2019-05-30"])
 
-print(dadosMaster.sort_values(by=['date']))
+print(dadosMaster.sort_values(by=['date']).head())
 #print(dadosMaster.loc[dados['date'] == "2018-05-31"])
 
 
@@ -35,7 +35,7 @@ print(dadosMaster.sort_values(by=['date']))
 
 
 # Create a Pandas Excel writer using XlsxWriter as the engine.
-writer = pd.ExcelWriter("../Output/DadosMaster.xlsx", engine='xlsxwriter')
+writer = pd.ExcelWriter("../Output/DadosMaster2.xlsx", engine='xlsxwriter')
 
 # Convert the dataframe to an XlsxWriter Excel object.
 dadosMaster.to_excel(writer, sheet_name='Sheet1')
