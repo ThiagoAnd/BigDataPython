@@ -84,7 +84,31 @@ fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=sabadoDF['views'].values,
                     mode='lines+markers',
                     name='Sabado'))
 
-fig.write_html('./Output/MediaSemanalMensalDeViews.html', auto_open=True)
+fig.update_layout(
+    title={
+        'text': "Media mensal dos dias da semana de views 2018 - 2019",
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'},
+
+    xaxis_title="Meses",
+    yaxis_title="Quantidade de views",
+    legend_title_text='Dias',
+    xaxis=dict(
+
+       type='category'
+    ),
+
+    font=dict(
+        family="Courier New, monospace",
+        size=18,
+        color="#297554"
+
+    )
+)
+
+fig.write_html('../Output/MediaSemanalMensalDeViews.html', auto_open=True)
 #fig.show()
 
 
