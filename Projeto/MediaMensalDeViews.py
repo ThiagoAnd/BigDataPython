@@ -55,6 +55,6 @@ fig.update_layout(
     )
 )
 
-fig.write_html('../Output/first_figure.html', auto_open=True)
+fig.write_html('../Output/first_figure2.html', auto_open=True)
 print("Gravação do grafico finalizada")
 fig.show()
