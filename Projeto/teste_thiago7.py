@@ -41,81 +41,63 @@ for i in range(len(dir_list)):
 # Criando nova coluna
 # dadosMaster['new'] = dadosMaster['date'].astype('str').str[:7]
 # dadosMaster['Dia'] = dadosMaster['date'].astype('date').dt.day_name()
-dadosMaster['dia'] = pd.to_datetime(dadosMaster['date'])
-dadosMaster['dia'] = dadosMaster['dia'].dt.day_name()
-
-dadosMaster['mes'] = dadosMaster['date'].astype('str').str[:7]
-dadosMaster.reset_index(drop=True)
-# print(dadosMaster.head())
-# print(dadosMaster['dia'])
-sextaDF = dadosMaster.loc[dadosMaster['dia'] == "Friday"]
-# print(sextaDF.head())
-
-sextaDF = sextaDF[['mes', 'views']].groupby('mes').mean()
-sextaDF.reset_index(inplace=True)
-
-print(sextaDF)
 
 
+somaDF = dadosMaster.groupby('date').sum()
+somaDF['Aproveitamento_End_Element'] = (somaDF['end_screen_element_clicks']/somaDF['end_screen_elements_shown'])*100
+somaDF['Aproveitamento_End_Element'] = somaDF['Aproveitamento_End_Element'].round(1)
+somaDF.reset_index(inplace=True)
 
 
-# output = dadosMaster[['mes', 'views']].groupby('mes').mean()
-
-# print(Sexta)
-# print(Sexta['dia'])
-# dadosMaster['Dia'] = dadosMaster
-# print(dadosMaster)
-# print(dadosMaster[['date','datinha']])
-# print(dadosMaster.groupby('datinha').max())
-# dadosMaster['new'] = dadosMaster['date'].astype('str').str[:7]
+mediaDF = dadosMaster.groupby('date').mean()
+mediaDF.reset_index(inplace=True)
+mediaDF['Aproveitamento_End_Element']  = somaDF['Aproveitamento_End_Element']
+#mediaDF['horas'] = pd.to_datetime(mediaDF['watch_time_minutes'],unit='m').dt.strftime('%H:%M')
+#mediaDF['horas'] = pd.to_datetime(mediaDF['watch_time_minutes'],unit='m').dt.strftime('%H:%M:%S')
+#mediaDF = mediaDF.round(1)
+print(mediaDF)
 
 
-# output = dadosMaster[['new','views']].groupby('new').mean()
-# output.reset_index(inplace=True)
-# print(output['views'].values)
 
 
-'''
 
-import plotly.graph_objs as go
+import plotly.graph_objects as go
 
-fig = go.Figure(data=go.Bar(x = output['new'].values,
-                y = output['views'].values,
-                name = 'Gráfico 1',
-                marker = {'color': '#297554'}))
+#size = [20, 40, 60, 80, 100, 80, 60, 40, 20, 40]
+fig = go.Figure(data=[go.Scatter(
+    x=mediaDF['watch_time_minutes'].values,
+    y=mediaDF['Aproveitamento_End_Element'].values,
+    mode='markers',
+    marker=dict(
+        size=20,
+        #sizemode='area',
+        #sizeref=2.*max(size)/(40.**2),
+        #sizemin=4
+    )
+)])
 
 fig.update_layout(
     title={
-        'text': "Media mensal de views 2018 - 2019",
+        'text': "Relação do aproveitamento do uso de telas finais por minutos de video assistidos",
         'y': 0.9,
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top'},
 
-    xaxis_title="Meses",
-    yaxis_title="Quantidade de views",
+    xaxis_title="Tempo assistido em geral (Minutes)",
+    yaxis_title="Aproveitamento de telas finais no video (%)",
+
+
+
     font=dict(
         family="Courier New, monospace",
         size=18,
         color="#297554"
+
     )
 )
 
-fig.show()
-#fig.write_html('../first_figure.html', auto_open=True)
+fig.write_html('../Output/bublesTemplate.html', auto_open=True)
 
+#fig.show()
 
-
-
-#print(output)
-#Show this way:
-#           views
-#   new
-#print(output.columns.values) #
-
-
-#print(output.columns.values) # Só mostra a coluna Views
-
-
-
-'''

@@ -46,6 +46,19 @@ fig.update_layout(
 
        type='category'
     ),
+    legend=dict(
+        # x=0,
+        # y=1,
+        traceorder="normal",
+        font=dict(
+            family="sans-serif",
+            size=12,
+            color="black"
+        ),
+        bgcolor="LightSteelBlue",
+        bordercolor="Black",
+        borderwidth=2
+    ),
 
     font=dict(
         family="Courier New, monospace",
@@ -55,6 +68,6 @@ fig.update_layout(
     )
 )
 
-fig.write_html('../Output/first_figure.html', auto_open=True)
+fig.write_html('../Output/MediaMensalDeViews.html', auto_open=True)
 print("Gravação do grafico finalizada")
-fig.show()
+#fig.show()

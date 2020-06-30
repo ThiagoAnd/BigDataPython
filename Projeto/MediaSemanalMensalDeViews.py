@@ -18,13 +18,11 @@ for i in range(len(dir_list)):
     dados = pd.read_excel(filename)
     dadosMaster = dadosMaster.append(dados)
 
-
 dadosMaster['dia'] = pd.to_datetime(dadosMaster['date'])
 dadosMaster['dia'] = dadosMaster['dia'].dt.day_name()
 
 dadosMaster['mes'] = dadosMaster['date'].astype('str').str[:7]
 dadosMaster.reset_index(drop=True)
-
 
 domingoDF = dadosMaster.loc[dadosMaster['dia'] == "Sunday"]
 domingoDF = domingoDF[['mes', 'views']].groupby('mes').mean()
@@ -50,39 +48,38 @@ sextaDF = dadosMaster.loc[dadosMaster['dia'] == "Friday"]
 sextaDF = sextaDF[['mes', 'views']].groupby('mes').mean()
 sextaDF.reset_index(inplace=True)
 
-
 sabadoDF = dadosMaster.loc[dadosMaster['dia'] == "Saturday"]
 sabadoDF = sabadoDF[['mes', 'views']].groupby('mes').mean()
 sabadoDF.reset_index(inplace=True)
 
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=domingoDF['mes'].values, y=domingoDF['views'].values,
-                    mode='lines+markers',
-                    name='Domingo'))
+                         mode='lines+markers',
+                         name='Domingo'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=segundaDF['views'].values,
-                    mode='lines+markers',
-                    name='Segunda'))
+                         mode='lines+markers',
+                         name='Segunda'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=tercaDF['views'].values,
-                    mode='lines+markers',
-                    name='Terça'))
+                         mode='lines+markers',
+                         name='Terça'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=quartaDF['views'].values,
-                    mode='lines+markers',
-                    name='Quarta'))
+                         mode='lines+markers',
+                         name='Quarta'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=quintaDF['views'].values,
-                    mode='lines+markers',
-                    name='Quinta'))
+                         mode='lines+markers',
+                         name='Quinta'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=sextaDF['views'].values,
-                    mode='lines+markers',
-                    name='Sexta'))
+                         mode='lines+markers',
+                         name='Sexta'))
 
 fig.add_trace(go.Scatter(x=segundaDF['mes'].values, y=sabadoDF['views'].values,
-                    mode='lines+markers',
-                    name='Sabado'))
+                         mode='lines+markers',
+                         name='Sabado'))
 
 fig.update_layout(
     title={
@@ -91,24 +88,26 @@ fig.update_layout(
         'x': 0.5,
         'xanchor': 'center',
         'yanchor': 'top'},
+    legend=dict(
+        # x=0,
+        # y=1,
+        traceorder="normal",
+        font=dict(
+            family="sans-serif",
+            size=12,
+            color="black"
+        ),
+        bgcolor="LightSteelBlue",
+        bordercolor="Black",
+        borderwidth=2
+    ),
 
     xaxis_title="Meses",
     yaxis_title="Quantidade de views",
     legend_title_text='Dias',
-    xaxis=dict(
-
-       type='category'
-    ),
-
-    font=dict(
-        family="Courier New, monospace",
-        size=18,
-        color="#297554"
-
-    )
+    xaxis={'type': 'category'},
+    font={'family': "Courier New, monospace", 'size': 18, 'color': "#297554"}
 )
 
 fig.write_html('../Output/MediaSemanalMensalDeViews.html', auto_open=True)
-#fig.show()
-
-
+# fig.show()
