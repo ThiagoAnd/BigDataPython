@@ -41,14 +41,20 @@ for i in range(len(dir_list)):
 #Criando nova coluna
 #dadosMaster['new'] = dadosMaster['date'].astype('str').str[:7]
 #dadosMaster['Dia'] = dadosMaster['date'].astype('date').dt.day_name()
-dadosMaster['diasSemanas'] = pd.to_datetime(dadosMaster['date']).dt.day_name()
+dadosMaster['mes'] = pd.to_datetime(dadosMaster['date']).astype('str').str[:7]
 #dadosMaster['diasSemanas'] = dadosMaster['dia'].dt.day_name()
 
 #rint(dadosMaster.groupby(['datinha']).mean())
 #dadosMaster['media'] = dadosMaster[['diasSemanas', 'views']].groupby('diasSemanas').mean()
 
-print(dadosMaster[['diasSemanas', 'views']].groupby('diasSemanas').mean())
+print(dadosMaster[['mes', 'cards_shown']].groupby('mes').sum())
+print(dadosMaster[['mes', 'card_clicks']].groupby('mes').sum())
+print(dadosMaster[['mes', 'card_teasers_shown']].groupby('mes').sum())
+print( dadosMaster[['mes', 'card_teaser_clicks']].groupby('mes').sum())
 
+
+#numTeaserShows = dadosMaster[['diasSemanas', 'card_teasers_shown']].groupby('diasSemanas').sum()
+#numTeaserCliks = dadosMaster[['diasSemanas', 'card_teaser_clicks']].groupby('diasSemanas').sum()
 #dadosMaster['Dia'] = dadosMaster
 #print(dadosMaster)
 #print(dadosMaster[['date','datinha']])

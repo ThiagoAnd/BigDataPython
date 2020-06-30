@@ -68,6 +68,10 @@ fig.update_layout(
     )
 )
 
+<<<<<<< HEAD
 fig.write_html('../Output/MediaMensalDeViews.html', auto_open=True)
+=======
+fig.write_html('../Output/first_figure2.html', auto_open=True)
+>>>>>>> ab41e385eedcf5d23aa46c5cfff2b1c4bf6aaafa
 print("Gravação do grafico finalizada")
 #fig.show()
