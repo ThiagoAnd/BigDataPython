@@ -29,7 +29,7 @@ df = output
 px.defaults.color_continuous_scale = px.colors.sequential.Blackbody
 fig = px.bar(df, x="diasSemana", y="views", color="diasSemana",
 
-             title="Media Semanal de views 2018 - 2019")
+             title="Media anual de views por dia da semana 2018 - 2019")
 
 fig.update_layout(
     title={
