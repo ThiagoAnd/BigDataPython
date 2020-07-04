@@ -55,6 +55,6 @@ fig.update_layout(
     )
 )
 
-fig.write_html('../Output/Media_likes_Semanal.html', auto_open=True)
+fig.write_html('../Output/RelacaoTelasFinais.html', auto_open=True)
 print("Gravação do grafico finalizada")
 fig.show()
